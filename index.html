@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Anatomy of a Tweet</title>
+    <!-- <link rel="stylesheet/less" type="text/css" href="styles.less"/>
+        <link rel="stylesheet/less" type="text/css" href="bootstrap.less"/>
+        <script src="less.js"></script> -->
+    <style>
+    
+      * { padding:0; margin:0; list-style:none; }
+      
+      html {
+        height:100%;
+      }
+      
+      body {
+        font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+        background: hsl(207, 23%, 53%);
+        height:100%;
+        -webkit-box-shadow: inset 0px 0px 100px rgba(0,0,0,0.1);
+      }
+      
+      #container {
+        padding-top:195px;
+        position:relative;
+      }
+      
+      #profile-background {
+        height:100%;
+        width:100%;
+        position:absolute;
+        top:0px;
+        left:0px;
+        opacity:0.05;
+      }
+
+      #tweet-container {
+        width: 505px;
+        height: 285px;
+        margin: auto auto;
+        background: -webkit-linear-gradient(top,white,hsl(200, 11%, 71%) 120%);
+        -webkit-box-shadow: 0px 0px 250px rgba(0,0,0,0.3);
+        position:relative;
+      }
+
+      #tweet {
+        padding: 35px 40px 35px 40px;
+        font-size: 23px;
+        font-family:Georgia,serif;
+        color:#555;
+        text-shadow: 0px 0px 1px hsla(0, 0%, 75%, 0.3);
+      }
+      
+      #attribution {
+        position: absolute;
+        top: 0px;
+        left: -125px;
+        height: 285px;
+        width: 105px;
+        background: -webkit-linear-gradient(left,hsla(210, 98%, 13%, 0.45),hsla(210, 68%, 20%, 0.4));
+      }
+      
+      img.icon {
+        position: absolute;
+        top: 25px;
+        left: 30px;
+      }
+
+      #meta {
+        position: absolute;
+        bottom: -75px;
+        left: 0px;
+        height: 55px;
+        width: 505px;
+        background: -webkit-linear-gradient(top,hsla(210, 98%, 13%, 0.45),hsla(210, 68%, 20%, 0.4));
+      }
+      
+      #tweet span {
+        display:block;
+        float:left;
+        height:40px;
+        margin-right:5px;
+        position:relative;
+      }
+      
+      #tweet span.highlight {
+        margin-right:9px;
+      }
+      
+      #author {
+        color: white;
+        text-shadow: 1px 1px 0px hsla(0, 0%, 0%, 0.1);
+        position: absolute;
+        top: -55px;
+        font-family: "Helvetica Neue";
+        font-weight: 200;
+        font-size: 21px;
+      }
+      
+      #tweet em {
+        font-style:normal;
+        display:block;
+        font-family:"Helvetica Neue";
+        font-weight:200;
+        -webkit-border-radius: 18px;
+        padding: 7px 10px;
+        font-size: 17px;
+        text-shadow: 1px 1px 0px hsla(0, 100%, 100%, 0.5);
+        margin-top: -3px;
+        -webkit-transition: all 0.8s linear;
+      }
+      
+      #tweet em:hover {
+        cursor:pointer;
+      }
+      
+      .urls {
+        background: -webkit-linear-gradient(top, hsla(210, 71%, 59%, 0.05), hsla(210, 38%, 70%, 0.15));
+        -webkit-box-shadow: inset 0.7px 1px 5px rgba(0,0,101,0.1);
+        color: hsl(207, 75%, 55%);
+      }
+      
+      .urls:hover {
+        -webkit-box-shadow:inset 0px 1px 3px rgba(0,25,50,0.5);
+        background: -webkit-linear-gradient(top, hsla(210, 71%, 59%, 0.15), hsla(210, 38%, 60%, 0.35));
+        color: hsl(207,75%,48%);
+      }
+      
+      .user_mentions {
+        background: -webkit-linear-gradient(top, hsla(100, 69%, 59%, 0.05), hsla(133, 38%, 70%, 0.2));
+        -webkit-box-shadow: inset 0.7px 1px 5px rgba(0,101,0,0.2);
+        color: hsl(144, 45%, 47%);
+      }
+      
+      .user_mentions:hover {
+        background: -webkit-linear-gradient(top, hsla(100, 69%, 59%, 0.1), hsla(133, 38%, 50%, 0.4));
+        -webkit-box-shadow: inset 0.7px 1px 5px rgba(0,50,25,0.4);
+        color: hsl(144, 45%, 37%);
+      }
+      
+      .hashtags {
+        background: -webkit-linear-gradient(top, hsla(0, 71%, 59%, 0.05), hsla(0, 38%, 70%, 0.15));
+        -webkit-box-shadow: inset 0.7px 1px 5px rgba(101,0,0,0.1);
+        color: hsl(0, 75%, 63%);
+      }
+      
+      .hashtags:hover {
+        -webkit-box-shadow:inset 0px 1px 3px rgba(50,25,0,0.5);
+        background: -webkit-linear-gradient(top, hsla(0, 71%, 59%, 0.15), hsla(0, 38%, 60%, 0.35));
+        color: hsl(7,75%,48%);
+      }
+    
+    </style>
+    <script type="text/javascript" src="ender.js"></script>
+    <script type="text/javascript" src="embroid.js"></script>
+  </head>
+  <body>
+    <div id="profile-background"></div>
+    <div id="container">
+      <div id="tweet-container">
+        <div id="attribution"></div>
+        <div id="meta"></div>
+        <div id="author"></div>
+        <div id="tweet">
+          <!--<span class="highlight"><em class="mention">@blickwickle</em></span>
+          <span>Thinking</span>
+          <span>about</span>
+          <span>wearing</span>
+          <span>my</span>
+          <span>man-thong.</span>
+          <span class="highlight">
+            <em class="hashtag"><strong>#</strong>whatstevewillwearonjuly4th</em>
+          </span>-->
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="app.js"></script>
+  </body>
+</html>
